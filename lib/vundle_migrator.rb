@@ -12,25 +12,44 @@ module VundleMigrator
     PLUGINS_START = "set nocompatible\n" \
                     "filetype off\n" \
                     "set rtp+=~/.vim/bundle/Vundle.vim\n\n" \
-                    "call vundle#begin()\n"
+                    "call vundle#begin()\n\n"
 
-    PLUGINS_END = "call vundle#end()\n\n" \
+    PLUGINS_END = "\n\ncall vundle#end()\n\n" \
                   "filetype plugin indent on"
 
-    def initialize(destination="#{Dir.home}/.vim/vundle", bundle="#{Dir.home}/.vim/bundle")
+    def initialize(source="#{Dir.home}/.vim/bundle", destination="#{Dir.home}/.vim/vundle")
       @destination = destination
-      @bundle = bundle
-      @entries = Dir.entries(bundle) - %w(. ..)
+      @source = source
+      @entries = Dir.entries(source) - %w(. ..)
       @plugins = []
     end
 
     def run
-      @entries.each do |plugin_directory|
-        Dir.chdir("#{@bundle}/#{plugin_directory}") do
-          package = `git remote -v`.match(/com[\/|:](.+)\.git/)[1]
-          @plugins << "Plugin '#{package}'"
+      create_plugins_list
+      create_plugins_file
+    end
+
+    private
+
+      def create_plugins_list
+        @entries.each do |plugin_directory|
+          Dir.chdir("#{@source}/#{plugin_directory}") do
+            package = `git remote -v`.match(/com[\/|:](.+)\.git/)[1]
+            @plugins << "Plugin '#{package}'"
+          end
         end
       end
-    end
+
+      def create_plugins_file
+        File.open("#{@destination}/plugins.vim", "w") do |f|
+          f.write(PLUGINS_START)
+
+          @plugins.each do |plugin|
+            f.write(plugin)
+          end
+
+          f.write(PLUGINS_END)
+        end
+      end
   end
 end
