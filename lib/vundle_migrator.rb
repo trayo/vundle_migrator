@@ -1,6 +1,10 @@
 module VundleMigrator
-  def self.migrate(args)
-    Migrator.new(args).run
+  def self.migrate(opts)
+    Migrator.new(opts[:vimrc_location], opts[:bundle_location], opts[:vundle_destination]).run
+  end
+
+  def self.dry_run(opts)
+    Migrator.new(opts[:vimrc_location], opts[:bundle_location], opts[:vundle_destination]).dry_run
   end
 
   class Migrator
@@ -17,11 +21,11 @@ module VundleMigrator
     PLUGINS_END = "\n\ncall vundle#end()\n\n" \
                   "filetype plugin indent on"
 
-    def initialize(vimrc, source="#{Dir.home}/.vim/bundle", destination="#{Dir.home}/.vim/vundle")
+    def initialize(vimrc, source, destination)
       @vimrc = vimrc
-      @source = source
-      @destination = destination
-      @entries = Dir.entries(source) - %w(. ..)
+      @source = source || "#{Dir.home}/.vim/bundle"
+      @destination = destination || "#{Dir.home}/.vim/vundle"
+      @entries = Dir.entries(@source) - %w(. ..)
       @plugins = []
     end
 
@@ -30,6 +34,11 @@ module VundleMigrator
       create_vundle_folder
       create_plugins_file
       prepend_vimrc
+    end
+
+    def dry_run
+      create_plugins_list
+      print_file_contents
     end
 
     def create_plugins_list
@@ -68,6 +77,12 @@ module VundleMigrator
       end
 
       FileUtils.remove("#{@vimrc}.old")
+    end
+
+    def print_file_contents
+      puts PLUGINS_START
+      puts @plugins
+      puts PLUGINS_END
     end
   end
 end
