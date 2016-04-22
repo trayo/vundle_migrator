@@ -9,7 +9,7 @@ require 'fileutils'
 
 class VundleMigratorTest < Minitest::Test
   def setup
-    @destination = "/vim/vundle"
+    @destination = "/vim/vundle/plugins.vim"
     @source = "/vim/bundle"
     @vim_root = "/vim"
     @vimrc = "#{@vim_root}/vimrc"
@@ -46,7 +46,7 @@ class VundleMigratorTest < Minitest::Test
 
       migrator.create_vundle_folder
 
-      assert File.directory?(@destination), "#{@destination} wasn't created"
+      assert File.directory?(File.dirname(@destination)), "#{@destination} wasn't created"
     end
   end
 
@@ -62,9 +62,9 @@ class VundleMigratorTest < Minitest::Test
       migrator.create_vundle_folder
       migrator.create_plugins_file
 
-      results = File.read("#{@destination}/plugins.vim")
+      results = File.read(@destination)
 
-      assert File.directory?(@destination), "#{@destination} wasn't created"
+      assert File.directory?(File.dirname(@destination)), "#{@destination} wasn't created"
       assert results =~ /.*#{vundle_begin}.*#{migrator.plugins.first}.*#{vundle_end}/m, "didn't find vundle commands '#{vundle_begin}' '#{migrator.plugins.first}' '#{vundle_end}' in: \n---\n#{results}\n---"
     end
   end

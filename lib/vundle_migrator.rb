@@ -24,7 +24,7 @@ module VundleMigrator
     def initialize(vimrc, source, destination)
       @vimrc = vimrc
       @source = source || "#{Dir.home}/.vim/bundle"
-      @destination = destination || "#{Dir.home}/.vim/vundle"
+      @destination = destination || "#{Dir.home}/.vim/vundle/plugins.vim"
       @entries = Dir.entries(@source) - %w(. ..)
       @plugins = []
     end
@@ -51,11 +51,11 @@ module VundleMigrator
     end
 
     def create_vundle_folder
-      FileUtils.mkdir_p(@destination)
+      FileUtils.mkdir_p(File.dirname(@destination))
     end
 
     def create_plugins_file
-      File.open("#{@destination}/plugins.vim", "w") do |f|
+      File.open(@destination, "w") do |f|
         f.write(PLUGINS_START)
 
         @plugins.each do |plugin|
