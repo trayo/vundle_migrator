@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.dirname(__FILE__) + '/../lib'
+require "slop"
+require 'vundle_migrator'
+require 'vundle_migrator/version'
+
+opts = Slop.parse do |o|
+  o.banner = "usage: vundle_migrate vimrc-location [OPTIONS]"
+  o.string '-l', '--vimrc-location', 'default: ~/.vimrc'
+  o.string '-b', '--bundle-location', 'default: ~/.vim/bundle'
+  o.string '-d', '--destination', 'default: ~/.vim/vundle/plugins.vim'
+  o.bool '-r', '--dry-run', 'displays the results of creating the plugins.vim without modifying files'
+  o.bool '-h', '--help', 'displays this page'
+  o.on '-v', '--version', 'displays the version' do
+    puts VundleMigrator::VERSION
+    exit
+  end
+end
+
+if ARGV.count.zero? || opts.help?
+  puts opts
+  exit
+end
+
+if opts[:vimrc_location].nil?
+  puts "Please provide a vimrc location with the -l flag"
+  exit
+end
+
+if opts.dry_run?
+  VundleMigrator.dry_run(opts)
+else
+  VundleMigrator.migrate(opts)
+end
