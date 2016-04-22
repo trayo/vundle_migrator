@@ -1,24 +1,36 @@
 # Vundle Migrator
 
+Vundle Migrator is a tool that will migrate your current vim setup to use Vundle. It works by creating a `plugins.vim` that contains a list of your existing plugins from your bundle folder. The list will already be formatted in the vundle format: `Plugin "username/repo"`.
 
 ## Installation
 
 `$ gem install vundle_migrator`
 
+## Uninstallation
+
+`$ gem uninstall vundle_migrator`
+
 ## Usage
 
-TODO: Write usage instructions here
+`$ ./vundle_migrate vimrc-location [OPTIONS]`
 
-## Development
+|Options|Requirement|Default Value|Description
+|---|---|
+|-l, --vimrc-location|*Required*|None|Used to add a line to your vimrc that sources the final plugins.vim
+|-b, --bundle-location|*Optional*|`~/.vim/bundle`|Used to build the list of plugins
+|-d, --destination|*Required*|`~/.vim/vundle/plugins.vim`|Used as the destination of the plugins file.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+#### Other Options
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
+|Options|Description|
+|---|---|
+|-r, --dry-run|Displays the final result of the `plugins.vim` without modifying files.
+|-h, --help|displays this page
+|-v, --version|displays the version
+    
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/vundle_migrator.
-
+Issues and pull requests are welcome! Please try and submit them with a test demonstrating the issue.
 
 ## License
 

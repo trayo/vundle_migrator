@@ -7,9 +7,9 @@ require 'vundle_migrator/version'
 
 opts = Slop.parse do |o|
   o.banner = "usage: vundle_migrate vimrc-location [OPTIONS]"
-  o.string '-l', '--vimrc-location', 'default: ~/.vimrc'
-  o.string '-b', '--bundle-location', 'default: ~/.vim/bundle'
-  o.string '-d', '--destination', 'default: ~/.vim/vundle/plugins.vim'
+  o.string '-l', '--vimrc-location', 'Required - Used to add a line to your vimrc that sources the final plugins.vim'
+  o.string '-b', '--bundle-location', 'Optional - Used to build the list of plugins. Default: ~/.vim/bundle'
+  o.string '-d', '--destination', 'Optional - Used as the destination of the plugins file. Default: ~/.vim/vundle/plugins.vim'
   o.bool '-r', '--dry-run', 'displays the results of creating the plugins.vim without modifying files'
   o.bool '-h', '--help', 'displays this page'
   o.on '-v', '--version', 'displays the version' do
