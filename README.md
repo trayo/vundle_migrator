@@ -6,9 +6,7 @@ Vundle Migrator is a tool that will migrate your current vim setup to use Vundle
 
 `$ gem install vundle_migrator`
 
-## Uninstallation
-
-`$ gem uninstall vundle_migrator`
+**Note:** When you have finished using Vundle Migrator, it can be uninstalled with `$ gem uninstall vundle_migrator`
 
 ## Usage
 
@@ -25,9 +23,9 @@ Vundle Migrator is a tool that will migrate your current vim setup to use Vundle
 |Options|Description|
 |---|---|
 |-r, --dry-run|Displays the final result of the `plugins.vim` without modifying files.
-|-h, --help|displays this page
+|-h, --help|displays the help page
 |-v, --version|displays the version
-    
+
 ## Contributing
 
 Issues and pull requests are welcome! Please try and submit them with a test demonstrating the issue.
