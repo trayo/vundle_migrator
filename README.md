@@ -12,8 +12,8 @@ Vundle Migrator is a tool that will migrate your current vim setup to use Vundle
 
 `$ ./vundle_migrate vimrc-location [OPTIONS]`
 
-|Options|Requirement|Default Value|Description
-|---|---|
+|Options|Requirement|Default Value|Description|
+|---|---|---|---|
 |-l, --vimrc-location|*Required*|None|Used to add a line to your vimrc that sources the final plugins.vim
 |-b, --bundle-location|*Optional*|`~/.vim/bundle`|Used to build the list of plugins
 |-d, --destination|*Required*|`~/.vim/vundle/plugins.vim`|Used as the destination of the plugins file.
