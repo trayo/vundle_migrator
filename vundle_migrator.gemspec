@@ -17,12 +17,6 @@ Gem::Specification.new do |spec|
   spec.executables = ["vundle_migrator"]
   spec.require_paths = ["lib"]
 
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  end
-
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "fakefs", "~> 0.8.1"
   spec.add_development_dependency "minitest", "~> 5.8"
