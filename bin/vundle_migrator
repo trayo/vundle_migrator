@@ -2,8 +2,9 @@
 
 $:.unshift File.dirname(__FILE__) + '/../lib'
 require "slop"
-require 'vundle_migrator'
-require 'vundle_migrator/version'
+require "fileutils"
+require "vundle_migrator"
+require "vundle_migrator/version"
 
 opts = Slop.parse do |o|
   o.banner = "usage: vundle_migrate vimrc-location [OPTIONS]"
