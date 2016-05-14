@@ -18,7 +18,7 @@ module VundleMigrator
                     "set rtp+=~/.vim/bundle/Vundle.vim\n\n" \
                     "call vundle#begin()\n\n"
 
-    PLUGINS_END = "\n\ncall vundle#end()\n\n" \
+    PLUGINS_END = "\ncall vundle#end()\n\n" \
                   "filetype plugin indent on"
 
     def initialize(vimrc, source, destination)
@@ -59,7 +59,7 @@ module VundleMigrator
         f.write(PLUGINS_START)
 
         @plugins.each do |plugin|
-          f.write(plugin)
+          f.write("#{plugin}\n")
         end
 
         f.write(PLUGINS_END)
