@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.executables = ["vundle_migrator"]
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "fakefs", "~> 0.8.1"
+  spec.add_development_dependency "bundler", "~> 1.12"
+  spec.add_development_dependency "fakefs", "~> 0.8"
   spec.add_development_dependency "minitest", "~> 5.8"
   spec.add_development_dependency "rake", "~> 11.1"
   spec.add_development_dependency "slop", "~> 4.3"
