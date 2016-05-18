@@ -1,0 +1,68 @@
+set rtp+=/usr/local/go/misc/vim
+filetype plugin indent on
+syntax on
+syntax enable
+
+
+"" ==========  setup stuff   ==========
+set nobackup                                 " no backup files
+set nowritebackup                            " only in case you don't want a backup file while editing
+set noswapfile                               " no swap files
+set scrolloff=2                              " adds top/bottom buffer between cursor and window
+set cursorline                               " colours the line the cursor is on
+set number                                   " line numbers
+set clipboard=unnamed                        " allows y and p to clipboard vim > 7.4
+set complete-=i                              " ignores included files in autocomplete
+set splitbelow                               " sets vim splits to default right and bottom
+set splitright
+set hlsearch                                 " highlight matches
+set incsearch                                " incremental searching
+set nowrap                                   " don't wrap lines
+set tabstop=2 shiftwidth=2                   " a tab is two spaces (or set this to 4)
+set expandtab                                " use spaces, not tabs (optional)
+set backspace=indent,eol,start               " backspace through everything in insert mode
+set wildmode=longest:list                    " better command line completion
+set ignorecase                               " use case ignore by default
+set laststatus=2                             " Always show the statusline
+set t_Co=256                                 " Explicitly tell vim that the terminal supports 256 colors
+set nocompatible                             " choose no compatibility with legacy vi
+set encoding=utf-8
+set showcmd                                  " display incomplete commands
+
+
+" change highlight text colors to black
+highlight Visual ctermfg=7 ctermbg=8
+
+
+" ========= leader snippets =========
+nmap <Leader>e :NERDTreeToggle<CR>
+
+
+" ========= easier pane navigation =========
+" make left pane fullscreen
+nnoremap <Leader>] <c-w>l<c-w><BAR>0
+" make right pane fullscreen
+nnoremap <Leader>[ <c-w>h<c-w><BAR>0
+" make panes equal size
+nnoremap <Leader>= <c-w>=
+
+
+" ========= easier navigation between split windows =========
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+
+" ======= command navigation =======
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-y> <C-r><C-o>"
+cnoremap <C-d> <Right><C-h>
+
+
+" ========== nerdtree ==========
+" close vim if NERDTree is the only open buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
