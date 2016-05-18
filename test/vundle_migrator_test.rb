@@ -9,6 +9,10 @@ require 'fileutils'
 
 class VundleMigratorTest < Minitest::Test
   def setup
+    # suppress stdout
+    @old_stdout = $stdout
+    $stdout = StringIO.new
+
     @destination = "/vim/vundle/plugins.vim"
     @source = "/vim/bundle"
     @vim_root = "/vim"
@@ -16,6 +20,9 @@ class VundleMigratorTest < Minitest::Test
   end
 
   def teardown
+    # restore stdout
+    $stdout = @old_stdout
+
     FakeFS do
       FileUtils.rm_r("vim") if File.file?("vim")
     end

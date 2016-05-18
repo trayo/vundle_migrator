@@ -30,10 +30,13 @@ module VundleMigrator
     end
 
     def run
+      puts "starting the migration"
       create_plugins_list
       create_vundle_folder
       create_plugins_file
       prepend_vimrc
+      puts "migration finished"
+      puts "don't forget to run ':PluginInstall' after loading vim"
     end
 
     def dry_run
@@ -42,6 +45,7 @@ module VundleMigrator
     end
 
     def create_plugins_list
+      puts "creating list of plugins"
       @plugins = @entries.map do |plugin_directory|
         Dir.chdir("#{@source}/#{plugin_directory}") do
           package = `git remote -v`.match(/com[\/|:](.+)\.git/)[1]
@@ -51,10 +55,12 @@ module VundleMigrator
     end
 
     def create_vundle_folder
+      puts "creating folder at #{File.dirname(@destination)}"
       FileUtils.mkdir_p(File.dirname(@destination))
     end
 
     def create_plugins_file
+      puts "creating #{@destination}"
       File.open(@destination, "w") do |f|
         f.write(PLUGINS_START)
 
@@ -67,6 +73,7 @@ module VundleMigrator
     end
 
     def prepend_vimrc
+      puts "adding 'source vundle' to #{@vimrc}"
       File.rename("#{@vimrc}", "#{@vimrc}.old")
 
       File.open("#{@vimrc}", 'w') do |f|
@@ -80,6 +87,7 @@ module VundleMigrator
     end
 
     def print_file_contents
+      puts "file contents:\n------\n"
       puts PLUGINS_START
       puts @plugins
       puts PLUGINS_END
