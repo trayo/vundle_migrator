@@ -9,3 +9,18 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :default => :test
+
+desc "Build the docker image"
+task :docker_build do
+  puts %x[docker build -t vundle_migrator .]
+end
+
+desc "Run the vundle_migrator binary in docker"
+task :docker_run do
+  puts %x[docker run -it --rm vundle_migrator bin/vundle_migrator -l /root/.vimrc]
+end
+
+desc "Run the vundle_migrator binary with the dry_run flag in docker"
+task :docker_dry_run do
+  puts %x[docker run -it --rm vundle_migrator bin/vundle_migrator -l /root/.vimrc -r]
+end
