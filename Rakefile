@@ -14,6 +14,7 @@ desc "Build the docker image"
 task :docker_build do
   puts %x[docker build -t vundle_migrator .]
 end
+task :docker_build_image => :docker_build
 
 desc "Run the vundle_migrator binary in docker"
 task :docker_run do
