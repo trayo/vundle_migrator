@@ -8,3 +8,5 @@
 /spec/reports/
 /tmp/
 .dockerignore
+
+*.gem
