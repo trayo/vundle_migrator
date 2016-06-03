@@ -12,7 +12,8 @@ task :default => :test
 
 desc "Build the docker image"
 task :docker_build do
-  puts %x[docker build -t vundle_migrator .]
+  gem_version=`cat lib/vundle_migrator/version.rb`.match(/\d\.\d\.\d/)[0]
+  puts %x[docker build --build-arg GEM_VERSION=#{gem_version} -t vundle_migrator .]
 end
 task :docker_build_image => :docker_build
 

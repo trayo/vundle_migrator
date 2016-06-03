@@ -17,4 +17,9 @@ RUN echo 'alias vundle_migrator="/usr/src/app/bin/vundle_migrator -l /root/.vimr
 WORKDIR /usr/src/app
 ADD . /usr/src/app
 
-RUN bundle install --local
+# build the gem
+RUN gem build vundle_migrator.gemspec
+
+# install the gem
+ARG GEM_VERSION
+RUN gem install "vundle_migrator-$GEM_VERSION.gem"
