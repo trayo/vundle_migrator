@@ -10,3 +10,5 @@
 .dockerignore
 
 *.gem
+
+/.rake_tasks*
