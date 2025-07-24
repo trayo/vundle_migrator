@@ -1,7 +1,5 @@
 # Vundle Migrator
 
-[![Circle CI](https://circleci.com/gh/trayo/vundle_migrator.svg?style=svg)](https://circleci.com/gh/trayo/mv_listr)
-
 Vundle Migrator is a tool that will migrate your current vim setup to use Vundle. It works by creating a `plugins.vim` that contains a list of your existing plugins from your bundle folder. The list will already be formatted in the vundle format: `Plugin "username/repo"`.
 
 ## Installation
